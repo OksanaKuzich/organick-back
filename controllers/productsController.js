@@ -29,8 +29,8 @@ const getRandomProductsController = async () => {
   return data;
 };
 
-const createProductsOrderController = async (req, _, next) => {
-  const selectedProducts = req.body.products;
+const createProductsOrderController = async (req) => {
+  const { selectedProducts } = req.body;
   const orderedProductsQuantities = await changeProductsQuantity(
     selectedProducts
   );
