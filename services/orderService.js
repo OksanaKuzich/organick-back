@@ -1,6 +1,6 @@
 const { Order } = require("../schemas/orderSchema");
 
-const createOrder = async (orderedProducts) => {
+const createOrder = async (orderedProducts, owner) => {
   const totalPrice = orderedProducts.reduce(
     (sum, { price, promoPrice, quantity }) => {
       if (promoPrice === 0) {
@@ -11,7 +11,7 @@ const createOrder = async (orderedProducts) => {
     0
   );
 
-  const order = await Order.create({ totalPrice, orderedProducts });
+  const order = await Order.create({ totalPrice,, owner, orderedProducts });
   return order;
 };
 

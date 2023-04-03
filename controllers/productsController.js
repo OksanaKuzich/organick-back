@@ -30,7 +30,7 @@ const getRandomProductsController = async () => {
 };
 
 const createProductsOrderController = async (req, _, next) => {
-  const selectedProducts = req.body;
+  const selectedProducts = req.body.products;
   const orderedProductsQuantities = await changeProductsQuantity(
     selectedProducts
   );
@@ -43,7 +43,8 @@ const createProductsOrderController = async (req, _, next) => {
     ).quantity;
     return product;
   });
-  const order = await createOrder(orderedProducts);
+  const { owner } = req.body;
+  const order = await createOrder(orderedProducts, owner);
   return order;
 };
 

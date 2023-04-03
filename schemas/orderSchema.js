@@ -8,6 +8,27 @@ const order = new Schema(
       required: [true, "Set total price for order"],
       min: 0,
     },
+    owner: {
+      fullName: {
+        type: String,
+        required: [true, "Set name for owner"],
+      },
+      email: {
+        type: String,
+        required: [true, "Set email for owner"],
+      },
+      address: {
+        type: String,
+        required: [true, "Set address for owner"],
+      },
+      phone: {
+        type: String,
+        required: [true, "Set phone for owner"],
+      },
+      message: {
+        type: String,
+      },
+    },
     orderedProducts: [
       {
         name: {
