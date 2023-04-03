@@ -11,7 +11,7 @@ const createOrder = async (orderedProducts, owner) => {
     0
   );
 
-  const order = await Order.create({ totalPrice,, owner, orderedProducts });
+  const order = await Order.create({ totalPrice, owner, orderedProducts });
   return order;
 };
 
