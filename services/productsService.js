@@ -3,8 +3,8 @@ const { createError } = require("../helpers/errors");
 
 const getAllProducts = async () => {
   const products = await Product.find().sort({
-    rate: -1,
     promoPrice: -1,
+    rate: -1,
     price: -1,
   });
   return products;
