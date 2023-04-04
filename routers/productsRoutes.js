@@ -18,6 +18,6 @@ router.get("/random", ctrlWrapper(getRandomProductsController));
 
 router.get("/:id", ctrlWrapper(getProductByIdController));
 
-router.patch("/", ctrlWrapper(createProductsOrderController));
+router.post("/", ctrlWrapper(createProductsOrderController));
 
 module.exports = router;
