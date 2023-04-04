@@ -31,6 +31,11 @@ const order = new Schema(
     },
     orderedProducts: [
       {
+        _id: {
+          type: String,
+          required: [true, "Set name for product"],
+          unique: true,
+        },
         name: {
           type: String,
           required: [true, "Set name for product"],

@@ -30,21 +30,21 @@ const getRandomProductsController = async () => {
 };
 
 const createProductsOrderController = async (req) => {
-  const { selectedProducts } = req.body;
+  const { orderedProducts } = req.body;
   const orderedProductsQuantities = await changeProductsQuantity(
-    selectedProducts
+    orderedProducts
   );
   if (!orderedProductsQuantities) {
     return createError(400, "Not enough products in stock.");
   }
-  const orderedProducts = orderedProductsQuantities.map((product) => {
-    product.quantity = selectedProducts.find(
+  const selectedProducts = orderedProductsQuantities.map((product) => {
+    product.quantity = orderedProducts.find(
       (i) => i._id === product._id.toString()
     ).quantity;
     return product;
   });
   const { owner } = req.body;
-  const order = await createOrder(orderedProducts, owner);
+  const order = await createOrder(selectedProducts, owner);
   return order;
 };
 

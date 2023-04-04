@@ -42,14 +42,14 @@ const getRandomProducts = async () => {
     .sort((a, b) => b.rate - a.rate);
 };
 
-const changeProductsQuantity = async (selectedProducts) => {
+const changeProductsQuantity = async (orderedProducts) => {
   const currentQuantity = await Product.find({
-    $or: selectedProducts.map(({ _id }) => {
+    $or: orderedProducts.map(({ _id }) => {
       return { _id };
     }),
   });
-
-  const isNotEnoughQuantity = selectedProducts.some(
+  console.log(orderedProducts);
+  const isNotEnoughQuantity = orderedProducts.some(
     ({ _id, quantity }) =>
       currentQuantity.find((i) => i._id.toString() === _id).quantity < quantity
   );
@@ -58,7 +58,7 @@ const changeProductsQuantity = async (selectedProducts) => {
     return false;
   }
 
-  const changeProductsPromises = selectedProducts.map(({ _id, quantity }) =>
+  const changeProductsPromises = orderedProducts.map(({ _id, quantity }) =>
     Product.findByIdAndUpdate(
       _id,
       {
@@ -70,9 +70,9 @@ const changeProductsQuantity = async (selectedProducts) => {
     )
   );
 
-  const orderedProducts = await Promise.all(changeProductsPromises);
+  const selectedProducts = await Promise.all(changeProductsPromises);
 
-  return orderedProducts;
+  return selectedProducts;
 };
 
 module.exports = {
