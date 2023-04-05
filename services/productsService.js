@@ -18,8 +18,8 @@ const getProductById = async (id) => {
 const getPopularProducts = async () => {
   const products = await Product.find({ promoPrice: { $gt: 0 } })
     .sort({
-      rate: -1,
       promoPrice: -1,
+      rate: -1,
     })
     .limit(8);
   return products;
